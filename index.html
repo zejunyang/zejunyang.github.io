@@ -229,6 +229,144 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zejunyang/zejunyang.github.io.git/2018/09/08/nossh/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="miyin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="miyin的修行之地">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/08/nossh/" itemprop="url">隐藏ssh登陆痕迹的小技巧</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-08T00:31:46+08:00">
+                2018-09-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>今天在freebuf上看到一篇文章 <a href="http://www.freebuf.com/articles/system/182860.html" target="_blank" rel="noopener">安全运维之如何找到隐匿于last和w命令中的ssh登录痕迹
+</a> ，觉得有用，就自己重做了一遍，加深记忆。</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>centos7+mac os</p>
+<h3 id="正常登陆ssh查看w和last"><a href="#正常登陆ssh查看w和last" class="headerlink" title="正常登陆ssh查看w和last"></a>正常登陆ssh查看w和last</h3><pre><code># w
+# last
+</code></pre><p><img src="/images/19.png" alt="avatar"></p>
+<h3 id="使用小技巧登陆ssh"><a href="#使用小技巧登陆ssh" class="headerlink" title="使用小技巧登陆ssh"></a>使用小技巧登陆ssh</h3><pre><code># ssh -lroot 192.168.30.164 /usr/bin/bash
+</code></pre><p><img src="/images/20.png" alt="avatar"></p>
+<h3 id="再次查看w和last"><a href="#再次查看w和last" class="headerlink" title="再次查看w和last"></a>再次查看w和last</h3><p>只有一开始正常登陆时的记录：</p>
+<p><img src="/images/21.png" alt="avatar"></p>
+<h2 id="排查的时候找到隐藏的ssh登陆痕迹"><a href="#排查的时候找到隐藏的ssh登陆痕迹" class="headerlink" title="排查的时候找到隐藏的ssh登陆痕迹"></a>排查的时候找到隐藏的ssh登陆痕迹</h2><p>方法一：</p>
+<pre><code># lsof -i:22 | grep EST 
+</code></pre><p><img src="/images/22.png" alt="avatar"></p>
+<p>方法二：</p>
+<pre><code># ps -ef | grep ssh
+</code></pre><p><img src="/images/23.png" alt="avatar"></p>
+<p>方法三：</p>
+<pre><code># cat secure | grep &quot;Accept&quot;
+</code></pre><p><img src="/images/24.png" alt="avatar"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/zejunyang/zejunyang.github.io.git/2018/09/03/ECShop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -664,7 +802,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -672,6 +810,15 @@
 
             
 
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
             
 
           </nav>
