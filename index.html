@@ -315,10 +315,11 @@
 </code></pre><p><img src="/images/31.png" alt="avatar"></p>
 <h3 id="第二步：在受感染机器执行client-sh"><a href="#第二步：在受感染机器执行client-sh" class="headerlink" title="第二步：在受感染机器执行client.sh"></a>第二步：在受感染机器执行client.sh</h3><p>执行前，需要先在client.sh的第5行设置域名。</p>
 <p><img src="/images/32.png" alt="avatar"></p>
-<p>因为我假设受感染机器是国内的mac，此处要使其能访问<a href="https://translate.google.com/，需要做以下设置：" target="_blank" rel="noopener">https://translate.google.com/，需要做以下设置：</a><br>以zsh为例，(mac下zsh使用的教程 &gt;&gt;&gt; <a href="https://zhuanlan.zhihu.com/p/19556676" target="_blank" rel="noopener">教程1</a> | <a href="https://thief.one/2017/06/27/1/" target="_blank" rel="noopener">教程2</a>)</p>
+<p>因为我假设受感染机器是国内的mac，此处要使其能访问<a href="https://translate.google.com/，" target="_blank" rel="noopener">https://translate.google.com/，</a> 需要做以下设置：<br>以zsh为例，(mac下zsh使用的教程 &gt;&gt;&gt; <a href="https://zhuanlan.zhihu.com/p/19556676" target="_blank" rel="noopener">教程1</a> | <a href="https://thief.one/2017/06/27/1/" target="_blank" rel="noopener">教程2</a>)</p>
 <pre><code>➜  ~ vim ~/.zshrc
-</code></pre><p>添加如下代理配置:<br><blockquote><p>alias proxy=’export all_proxy=socks5://127.0.0.1:1080’<br>alias unproxy=’unset all_proxy’</p>
-<footer><strong>[author[</strong><cite>source]] [link] [source_link_title]</cite></footer></blockquote></p>
+</code></pre><p>添加如下代理配置:</p>
+<blockquote><p>alias proxy=’export all_proxy=socks5://127.0.0.1:1080’<br>alias unproxy=’unset all_proxy’</p>
+<footer><strong>[author[</strong><cite>source]] [link] [source_link_title]</cite></footer></blockquote>
 <p><img src="/images/33.png" alt="avatar"></p>
 <p>:wq保存退出</p>
 <pre><code>➜  ~ source ~/.zshrc
