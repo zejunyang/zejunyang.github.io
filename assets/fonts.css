@@ -1,0 +1,28 @@
+@font-face {
+  font-family: "Xuanlan Serif";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("/assets/fonts/xuanlan-serif.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/cormorant-italic-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/assets/fonts/cormorant-roman-400.woff2") format("woff2");
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 100 400;
+  font-display: swap;
+  src: url("/assets/fonts/jetbrains-mono.woff2") format("woff2");
+}

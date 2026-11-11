@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+<channel>
+  <title>玄览</title>
+  <link>https://zejunyang.github.io/</link>
+  <description>一个关于智能体、符号与旧书的个人博客。</description>
+  <language>zh-CN</language>
+  <item>
+    <title>智能体的第一步是看见</title>
+    <link>https://zejunyang.github.io/posts/guan/</link>
+    <guid>https://zejunyang.github.io/posts/guan/</guid>
+    <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+    <description>多数失败不出在推理，而出在没看清环境。谈观察环节的设计。示例文章，定稿后可以整篇删掉。</description>
+  </item>
+  <item>
+    <title>工具调用与器物之道</title>
+    <link>https://zejunyang.github.io/posts/ding/</link>
+    <guid>https://zejunyang.github.io/posts/ding/</guid>
+    <pubDate>Sun, 19 Oct 2026 00:00:00 GMT</pubDate>
+    <description>鼎是炊具，也是礼器。函数调用同理：好工具的接口本身就是约定。示例文章，定稿后可以整篇删掉。</description>
+  </item>
+</channel>
+</rss>

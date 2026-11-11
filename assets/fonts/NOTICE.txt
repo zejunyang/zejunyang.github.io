@@ -1,0 +1,17 @@
+These webfonts are shipped under the SIL Open Font License, Version 1.1.
+https://openfontlicense.org
+
+Xuanlan Serif (xuanlan-serif.woff2)
+  A subset of Source Han Serif CN, variable weight axis 250-900.
+  Copyright 2017-2024 Adobe (http://www.adobe.com/), with Reserved Font Name "Source".
+  The family name was changed to Xuanlan Serif. The reserved name Source is not used.
+  Source is a trademark of Adobe in the United States and/or other countries.
+  Upstream: https://github.com/adobe-fonts/source-han-serif
+
+Cormorant Garamond (cormorant-roman-400.woff2, cormorant-italic-400.woff2)
+  Copyright 2015 The Cormorant Project Authors (github.com/CatharsisFonts/Cormorant)
+  Latin subset, unmodified apart from the subsetting done by the Google Fonts service.
+
+JetBrains Mono (jetbrains-mono.woff2)
+  Copyright 2020 The JetBrains Mono Project Authors (https://github.com/JetBrains/JetBrainsMono)
+  Latin subset, variable weight axis 100-400.
