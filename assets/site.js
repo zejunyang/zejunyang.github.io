@@ -67,10 +67,14 @@
     svgEl('text', { transform: `rotate(${i * 360 / 28}) translate(0 -282)` }, ringXiu).textContent = c;
   });
   const ringGua = document.getElementById('ring-gua');
-  for (let i = 0; i < 64; i++) {
-    const bits = i.toString(2).padStart(6, '0');
-    const g = svgEl('g', { transform: `rotate(${i * 5.625}) translate(0 -229)`, 'data-bits': bits }, ringGua);
-    drawGua(g, bits, 13, 1.5, 1.4);
+  function addRing(from, count) {
+    const end = Math.min(from + count, 64);
+    for (let i = from; i < end; i++) {
+      const bits = i.toString(2).padStart(6, '0');
+      const g = svgEl('g', { transform: `rotate(${i * 5.625}) translate(0 -229)`, 'data-bits': bits }, ringGua);
+      drawGua(g, bits, 13, 1.5, 1.4);
+    }
+    return end;
   }
   const center = document.getElementById('center');
   function setCenter(bits, hidden) {
@@ -81,10 +85,20 @@
   function mark(bits) {
     const prev = ringGua.querySelector('.on');
     if (prev) prev.classList.remove('on');
-    ringGua.querySelector(`[data-bits="${bits}"]`).classList.add('on');
+    const node = ringGua.querySelector(`[data-bits="${bits}"]`);
+    if (node) node.classList.add('on');
   }
   setCenter('000011');
+  let built = addRing(0, 8);
   mark('000011');
+  (function rest() {
+    if (built >= 64) return;
+    setTimeout(() => {
+      built = addRing(built, 8);
+      mark(bitsEl && bitsEl.textContent ? bitsEl.textContent : '000011');
+      rest();
+    }, 0);
+  })();
 
   /* ── 起卦：观 → 思 → 行 → 省 ── */
   const btn = document.getElementById('cast'), trace = document.getElementById('trace');
@@ -230,8 +244,12 @@
   new ResizeObserver(layout).observe(hero);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   if (!reduce) {
+    let last = 0;
     const frame = ms => {
-      if (visible && !document.hidden) draw(ms);
+      if (visible && !document.hidden && ms - last > 48) {
+        last = ms;
+        draw(ms);
+      }
       requestAnimationFrame(frame);
     };
     requestAnimationFrame(frame);
